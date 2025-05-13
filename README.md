@@ -22,33 +22,33 @@ gem install UPDATE_WITH_YOUR_GEM_NAME_IMMEDIATELY_AFTER_RELEASE_TO_RUBYGEMS_ORG
 
 ## Usage
 
-### コマンドラインツール
+### Command Line Tool
 
-アプリケーションにgemをインストールした後、以下のコマンドを使用してRubyファイルをAlbaフォーマットに移行できます：
-
-```bash
-alba_migration <ファイル名>
-```
-
-Bundlerを使用してgemを管理している場合：
+After installing the gem in your application, you can use the following command to migrate Ruby files to Alba format:
 
 ```bash
-bundle exec alba_migration <ファイル名>
+alba_migration <file_name>
 ```
 
-### オプション
-
-```
--h, --help     ヘルプメッセージを表示します
-```
-
-### 使用例
+If you're using Bundler to manage gems:
 
 ```bash
-# 単一のファイルを変換
+bundle exec alba_migration <file_name>
+```
+
+### Options
+
+```
+-h, --help     Display help message
+```
+
+### Examples
+
+```bash
+# Convert a single file
 alba_migration path/to/file.rb
 
-# ヘルプを表示
+# Display help
 alba_migration --help
 ```
 

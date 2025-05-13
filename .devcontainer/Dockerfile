@@ -1,6 +1,6 @@
 FROM ruby:3.3-slim
 
-# 必要なパッケージをインストール
+# Install required packages
 RUN apt-get update -qq && apt-get install -y \
   build-essential \
   git \
@@ -8,21 +8,21 @@ RUN apt-get update -qq && apt-get install -y \
   && apt-get clean \
   && rm -rf /var/lib/apt/lists/*
 
-# 作業ディレクトリの設定
+# Set working directory
 WORKDIR /app
 
-# Gemfileとgemspecをコピー
+# Copy Gemfile and gemspec
 COPY Gemfile* ../alba_migration.gemspec ./
 COPY lib/alba_migration/version.rb ./lib/alba_migration/version.rb
 
-# Gemのインストール
+# Install gems
 RUN bundle install
 
-# アプリケーションコードをコピー
+# Copy application code
 COPY . .
 
-# コマンド実行時のデフォルトディレクトリ
+# Set default directory for command execution
 WORKDIR /app
 
-# デフォルトのコマンド
+# Default command
 CMD ["bash"] 

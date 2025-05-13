@@ -15,25 +15,25 @@ module AlbaMigration
 
       file_path = args[0]
       unless File.exist?(file_path)
-        puts "エラー: ファイル '#{file_path}' が見つかりません"
+        puts "Error: File '#{file_path}' not found"
         exit(1)
       end
 
-      puts "ファイル '#{file_path}' のAlba移行を開始します..."
-      # ここに実際の移行処理を実装
+      puts "Starting Alba migration for file '#{file_path}'..."
+      # Implement actual migration process here
     end
 
     private
 
     def show_help
       puts <<~HELP
-        使用方法: alba_migration <ファイル名> [オプション]
+        Usage: alba_migration <file_name> [options]
 
-        オプション:
-          -h, --help     このヘルプメッセージを表示します
+        Options:
+          -h, --help     Display this help message
 
-        説明:
-          指定されたRubyファイルをAlbaフォーマットに移行します。
+        Description:
+          Migrates the specified Ruby file to Alba format.
       HELP
     end
   end

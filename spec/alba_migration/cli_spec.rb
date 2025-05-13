@@ -4,33 +4,33 @@ RSpec.describe AlbaMigration::CLI do
   let(:cli) { described_class.new }
 
   describe "#execute" do
-    context "引数がない場合" do
-      it "ヘルプメッセージを表示してエラー終了すること" do
-        expect { cli.execute([]) }.to output(/使用方法/).to_stdout.and raise_error(SystemExit)
+    context "when no arguments are provided" do
+      it "displays help message and exits with error" do
+        expect { cli.execute([]) }.to output(/Usage/).to_stdout.and raise_error(SystemExit)
       end
     end
 
-    context "--helpオプションが指定された場合" do
-      it "ヘルプメッセージを表示して正常終了すること" do
-        expect { cli.execute(["--help"]) }.to output(/使用方法/).to_stdout
-        # SystemExitが発生しないことを別途確認
+    context "when --help option is specified" do
+      it "displays help message and exits normally" do
+        expect { cli.execute(["--help"]) }.to output(/Usage/).to_stdout
+        # Verify that SystemExit is not raised
         expect { cli.execute(["--help"]) }.not_to raise_error
       end
     end
 
-    context "存在しないファイルが指定された場合" do
-      it "エラーメッセージを表示してエラー終了すること" do
-        expect { cli.execute(["non_existent_file.rb"]) }.to output(/エラー: ファイル/).to_stdout.and raise_error(SystemExit)
+    context "when a non-existent file is specified" do
+      it "displays error message and exits with error" do
+        expect { cli.execute(["non_existent_file.rb"]) }.to output(/Error: File/).to_stdout.and raise_error(SystemExit)
       end
     end
 
-    context "存在するファイルが指定された場合" do
+    context "when an existing file is specified" do
       before do
         allow(File).to receive(:exist?).with("test.rb").and_return(true)
       end
 
-      it "移行処理のメッセージを表示すること" do
-        expect { cli.execute(["test.rb"]) }.to output(/のAlba移行を開始します/).to_stdout
+      it "displays migration process message" do
+        expect { cli.execute(["test.rb"]) }.to output(/Starting Alba migration/).to_stdout
       end
     end
   end
