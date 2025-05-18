@@ -1,7 +1,7 @@
 PATH
   remote: .
   specs:
-    alba_migration (0.1.0)
+    alba_migration (0.0.1)
 
 GEM
   remote: https://rubygems.org/
@@ -19,6 +19,7 @@ GEM
       securerandom (>= 0.3)
       tzinfo (~> 2.0, >= 2.0.5)
       uri (>= 0.13.1)
+    alba (3.7.0)
     ast (2.4.3)
     base64 (0.1.2)
     benchmark (0.4.0)
@@ -29,6 +30,7 @@ GEM
     date (3.4.1)
     diff-lcs (1.6.2)
     drb (2.2.1)
+    fakefs (3.0.0)
     ffi (1.17.2)
     ffi (1.17.2-aarch64-linux-gnu)
     ffi (1.17.2-aarch64-linux-musl)
@@ -57,14 +59,22 @@ GEM
     logger (1.7.0)
     minitest (5.25.5)
     mutex_m (0.3.0)
+    node_mutation (1.24.4)
+    node_query (1.16.0)
+    node_visitor (1.1.0)
     parallel (1.27.0)
     parser (3.3.8.0)
       ast (~> 2.4.1)
       racc
+    parser_node_ext (1.4.2)
+      parser
     pp (0.6.2)
       prettyprint
+    prettier_print (1.2.1)
     prettyprint (0.2.0)
     prism (1.2.0)
+    prism_ext (0.4.2)
+      prism
     psych (5.2.6)
       date
       stringio
@@ -148,6 +158,24 @@ GEM
       uri (>= 0.12.0)
     stringio (3.1.7)
     strscan (3.1.5)
+    syntax_tree (6.2.0)
+      prettier_print (>= 1.2.0)
+    syntax_tree_ext (0.9.2)
+      syntax_tree
+    synvert (1.10.4)
+      synvert-core (>= 2.0.2)
+    synvert-core (2.2.2)
+      activesupport
+      node_mutation (>= 1.24.4)
+      node_query (>= 1.15.4)
+      node_visitor (>= 1.1.0)
+      parallel
+      parser
+      parser_node_ext (>= 1.4.2)
+      prism
+      prism_ext (>= 0.4.2)
+      syntax_tree
+      syntax_tree_ext (>= 0.9.2)
     terminal-table (4.0.0)
       unicode-display_width (>= 1.1.1, < 4)
     tzinfo (2.0.6)
@@ -169,13 +197,16 @@ PLATFORMS
   x86_64-linux-musl
 
 DEPENDENCIES
+  alba
   alba_migration!
+  fakefs
   irb
   rake (~> 13.0)
   rbs-inline
   rspec (~> 3.0)
   standard (~> 1.31.1)
   steep
+  synvert
 
 BUNDLED WITH
    2.5.22

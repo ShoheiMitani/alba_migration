@@ -2,6 +2,6 @@
 
 RSpec.describe AlbaMigration do
   it "has a version number" do
-    expect(AlbaMigration::VERSION).not_to be nil
+    expect(AlbaMigration::VERSION).to eq "0.0.1"
   end
 end

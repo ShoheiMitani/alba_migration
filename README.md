@@ -27,13 +27,13 @@ gem install UPDATE_WITH_YOUR_GEM_NAME_IMMEDIATELY_AFTER_RELEASE_TO_RUBYGEMS_ORG
 After installing the gem in your application, you can use the following command to migrate Ruby files to Alba format:
 
 ```bash
-alba_migration <file_name>
+alba_migration
 ```
 
 If you're using Bundler to manage gems:
 
 ```bash
-bundle exec alba_migration <file_name>
+bundle exec alba_migration
 ```
 
 ### Options
