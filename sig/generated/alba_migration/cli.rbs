@@ -1,0 +1,13 @@
+# Generated from lib/alba_migration/cli.rb with RBS::Inline
+
+module AlbaMigration
+  class CLI
+    # @rbs arg: Array[String]
+    # @rbs return: void
+    def self.start: (untyped args) -> void
+
+    # @rbs file_patterns: Array[String]
+    # @rbs return: void
+    def execute: (?Array[String] file_patterns) -> void
+  end
+end

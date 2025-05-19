@@ -1,0 +1,5 @@
+# Generated from lib/alba_migration/version.rb with RBS::Inline
+
+module AlbaMigration
+  VERSION: ::String
+end

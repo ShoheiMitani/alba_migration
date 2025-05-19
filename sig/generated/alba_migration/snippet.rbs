@@ -1,0 +1,9 @@
+# Generated from lib/alba_migration/snippet.rb with RBS::Inline
+
+module AlbaMigration
+  class Snippet
+    # @rbs file_patterns: Array[String]
+    # @rbs return: Synvert::Core::Rewriter
+    def self.create: (migrate_file_path: untyped) -> Synvert::Core::Rewriter
+  end
+end

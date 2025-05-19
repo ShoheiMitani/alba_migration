@@ -1,9 +1,13 @@
 # frozen_string_literal: true
 
+# rbs_inline: enabled
+
 require "synvert"
 
 module AlbaMigration
   class Snippet
+    # @rbs file_patterns: Array[String]
+    # @rbs return: Synvert::Core::Rewriter
     def self.create(migrate_file_path:)
       Synvert::Core::Rewriter.new "alba", "convert_ams_to_alba" do
         description <<~EOS

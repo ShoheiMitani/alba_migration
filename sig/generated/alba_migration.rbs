@@ -1,0 +1,4 @@
+# Generated from lib/alba_migration.rb with RBS::Inline
+
+module AlbaMigration
+end

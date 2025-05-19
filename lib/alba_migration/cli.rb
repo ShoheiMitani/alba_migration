@@ -1,15 +1,21 @@
 # frozen_string_literal: true
 
+# rbs_inline: enabled
+
 require "fileutils"
 require "synvert"
 require "alba_migration/snippet"
 
 module AlbaMigration
   class CLI
+    # @rbs arg: Array[String]
+    # @rbs return: void
     def self.start(args)
       new.execute(args)
     end
 
+    # @rbs file_patterns: Array[String]
+    # @rbs return: void
     def execute(file_patterns = [])
       matched_files = file_patterns.flat_map { |pattern| Dir.glob(pattern) }.uniq
       if matched_files.empty?
