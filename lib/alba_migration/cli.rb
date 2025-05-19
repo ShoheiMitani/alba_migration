@@ -28,8 +28,10 @@ module AlbaMigration
         exit(1)
       end
 
-      rewriter = AlbaMigration::Snippet.create(migrate_file_path: matched_files)
-      rewriter.process
+      snippets = AlbaMigration::Snippet.snippets(migrate_file_path: matched_files)
+      snippets.each do |rewriter|
+        rewriter.process
+      end
     end
   end
 end

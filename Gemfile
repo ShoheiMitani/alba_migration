@@ -6,7 +6,6 @@ source "https://rubygems.org"
 gemspec
 
 gem "alba"
-gem "fakefs", require: "fakefs/safe"
 gem "irb"
 gem "rake", "~> 13.0"
 gem "rbs-inline", require: false

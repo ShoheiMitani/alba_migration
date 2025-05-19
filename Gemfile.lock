@@ -31,7 +31,6 @@ GEM
     date (3.4.1)
     diff-lcs (1.6.2)
     drb (2.2.1)
-    fakefs (3.0.0)
     ffi (1.17.2)
     ffi (1.17.2-aarch64-linux-gnu)
     ffi (1.17.2-aarch64-linux-musl)
@@ -200,7 +199,6 @@ PLATFORMS
 DEPENDENCIES
   alba
   alba_migration!
-  fakefs
   irb
   rake (~> 13.0)
   rbs-inline
