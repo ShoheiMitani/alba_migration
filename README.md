@@ -1,71 +1,88 @@
 # AlbaMigration
 
-TODO: Delete this and the text below, and describe your gem
-
-Welcome to your new gem! In this directory, you'll find the files you need to be able to package up your Ruby library into a gem. Put your Ruby code in the file `lib/alba_migration`. To experiment with that code, run `bin/console` for an interactive prompt.
+## What is AlbaMigration?
+AlbaMigration is a Ruby gem that helps you migrate your Ruby code from [ActiveModelSerializers (AMS)](https://github.com/rails-api/active_model_serializers) to [Alba](https://github.com/okuramasafumi/alba) syntax automatically. It provides a command-line tool to convert AMS serializer classes to Alba resource classes, making your migration process easier and less error-prone.
 
 ## Installation
 
-TODO: Replace `UPDATE_WITH_YOUR_GEM_NAME_IMMEDIATELY_AFTER_RELEASE_TO_RUBYGEMS_ORG` with your gem name right after releasing it to RubyGems.org. Please do not do it earlier due to security reasons. Alternatively, replace this section with instructions to install your gem from git if you don't plan to release to RubyGems.org.
+Add this line to your application's Gemfile:
 
-Install the gem and add to the application's Gemfile by executing:
-
-```bash
-bundle add UPDATE_WITH_YOUR_GEM_NAME_IMMEDIATELY_AFTER_RELEASE_TO_RUBYGEMS_ORG
+```ruby
+gem "alba_migration"
 ```
 
-If bundler is not being used to manage dependencies, install the gem by executing:
+And then execute:
 
 ```bash
-gem install UPDATE_WITH_YOUR_GEM_NAME_IMMEDIATELY_AFTER_RELEASE_TO_RUBYGEMS_ORG
+bundle install
 ```
 
 ## Usage
 
 ### Command Line Tool
 
-After installing the gem in your application, you can use the following command to migrate Ruby files to Alba format:
+After installing the gem, you can use the CLI to migrate your Ruby files:
 
 ```bash
-alba_migration
+alba_migration path/to/your/serializer.rb
 ```
 
-If you're using Bundler to manage gems:
+You can also use glob patterns to migrate multiple files at once:
 
 ```bash
-bundle exec alba_migration
+alba_migration app/serializers/**/*.rb
 ```
 
-### Options
-
-```
--h, --help     Display help message
-```
-
-### Examples
+If you are using Bundler:
 
 ```bash
-# Convert a single file
-alba_migration path/to/file.rb
-
-# Display help
-alba_migration --help
+bundle exec alba_migration app/serializers/**/*.rb
 ```
 
-## Development
+#### Example
 
-After checking out the repo, run `bin/setup` to install dependencies. Then, run `rake spec` to run the tests. You can also run `bin/console` for an interactive prompt that will allow you to experiment.
+**Before:**
+```ruby
+class AttributesResource < ActiveModel::Serializer
+  attributes :id, :name
+end
+```
 
-To install this gem onto your local machine, run `bundle exec rake install`. To release a new version, update the version number in `version.rb`, and then run `bundle exec rake release`, which will create a git tag for the version, push git commits and the created tag, and push the `.gem` file to [rubygems.org](https://rubygems.org).
+**After:**
+```ruby
+class AttributesResource
+  include Alba::Resource
+
+  attributes :id, :name
+end
+```
+
+### Error Handling
+- If no files match the given pattern, an error message will be shown and the process will exit with status 1.
+
+## Supported Syntax
+Currently, AlbaMigration supports the following AMS syntax:
+- `class ... < ActiveModel::Serializer` with `attributes ...` inside the class body
+- Only the conversion of the class definition and `attributes` is supported at this time
+- Other AMS features (e.g., associations, custom methods) are **not** yet supported
 
 ## Contributing
 
-Bug reports and pull requests are welcome on GitHub at https://github.com/[USERNAME]/alba_migration. This project is intended to be a safe, welcoming space for collaboration, and contributors are expected to adhere to the [code of conduct](https://github.com/[USERNAME]/alba_migration/blob/master/CODE_OF_CONDUCT.md).
+Bug reports and pull requests are welcome on GitHub at [https://github.com/ShoheiMitani/alba_migration](https://github.com/ShoheiMitani/alba_migration).
+
+To get started with development:
+
+1. Clone the repository
+2. Run `bin/setup` to install dependencies
+3. Run tests with `bin/rspec spec/`
+4. Check/fix code style with `bin/standardrb --fix`
+
+If you find a bug, please [open an issue](https://github.com/ShoheiMitani/alba_migration/issues) with detailed steps to reproduce it.
 
 ## License
 
-The gem is available as open source under the terms of the [MIT License](https://opensource.org/licenses/MIT).
+This project is licensed under the MIT License. See [LICENSE.txt](LICENSE.txt) for details.
 
 ## Code of Conduct
 
-Everyone interacting in the AlbaMigration project's codebases, issue trackers, chat rooms and mailing lists is expected to follow the [code of conduct](https://github.com/[USERNAME]/alba_migration/blob/master/CODE_OF_CONDUCT.md).
+Everyone interacting in the AlbaMigration project's codebases, issue trackers, chat rooms and mailing lists is expected to follow the [Code of Conduct](CODE_OF_CONDUCT.md).
