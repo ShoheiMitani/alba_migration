@@ -1,25 +1,39 @@
 # frozen_string_literal: true
 
 RSpec.describe AlbaMigration::CLI do
-  describe "#execute", fakefs: true do
-    let(:dest_dir) { "tmp/synvert_snippets" }
+  describe "#execute" do
+    context "with fakefs", fakefs: true do
+      let(:file_path) { "app/serializers/attributes_serializer.rb" }
+      let(:test_content) { <<~EOS }
+        class AttributesResource < ActiveModel::Serializer
+          attributes :id, :name
+        end
+      EOS
+      let(:test_rewritten_content) { <<~EOS }
+        class AttributesResource
+          include Alba::Resource
+  
+          attributes :id, :name
+        end
+      EOS
+      let(:snippet_file) { "lib/alba_migration/snippets/convert_ams_to_alba.rb" }
 
-    before do
-      # creates dummy file for FakeFS
-      snippets_dir = File.expand_path(File.join(__dir__, "../../lib/alba_migration/snippets"))
-      FileUtils.mkdir_p(snippets_dir)
-      File.write(File.join(snippets_dir, "dummy1.rb"), "# test snippet")
-      File.write(File.join(snippets_dir, "dummy2.rb"), "# test snippet")
+      it "converts ActiveModelSerializers syntax to Alba syntax" do
+        FileUtils.mkdir_p(File.dirname(file_path))
+        File.write(file_path, test_content)
 
-      allow(Synvert::Command).to receive(:default_snippets_home).and_return(dest_dir)
-
-      FileUtils.mkdir_p(dest_dir)
+        AlbaMigration::CLI.start([file_path])
+        expect(File.read(file_path)).to eq(test_rewritten_content)
+      end
     end
 
-    it "copies all snippet files to the Synvert snippets home" do
-      described_class.new.execute
-      expect(File).to exist(File.join(dest_dir, "dummy1.rb"))
-      expect(File).to exist(File.join(dest_dir, "dummy2.rb"))
+    context "when no files match the given pattern" do
+      it "prints an error message and exits with status 1" do
+        expect(Kernel).to receive(:exit).with(1)
+        expect {
+          AlbaMigration::CLI.start(["nonexistent_file.rb"])
+        }.to output(/Error: No files matched the given pattern/).to_stdout
+      end
     end
   end
 end
