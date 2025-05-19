@@ -2,7 +2,7 @@
 
 # rbs_inline: enabled
 
-require "synvert"
+require "synvert/core"
 
 module AlbaMigration
   class Snippet

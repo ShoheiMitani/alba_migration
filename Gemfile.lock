@@ -2,6 +2,7 @@ PATH
   remote: .
   specs:
     alba_migration (0.0.1)
+      synvert-core
 
 GEM
   remote: https://rubygems.org/

@@ -3,7 +3,6 @@
 # rbs_inline: enabled
 
 require "fileutils"
-require "synvert"
 require "alba_migration/snippet"
 
 module AlbaMigration

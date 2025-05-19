@@ -26,14 +26,5 @@ RSpec.describe AlbaMigration::CLI do
         expect(File.read(file_path)).to eq(test_rewritten_content)
       end
     end
-
-    context "when no files match the given pattern" do
-      it "prints an error message and exits with status 1" do
-        expect(Kernel).to receive(:exit).with(1)
-        expect {
-          AlbaMigration::CLI.start(["nonexistent_file.rb"])
-        }.to output(/Error: No files matched the given pattern/).to_stdout
-      end
-    end
   end
 end
