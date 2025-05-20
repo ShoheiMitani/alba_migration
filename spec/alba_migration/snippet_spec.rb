@@ -28,6 +28,7 @@ RSpec.describe "ActiveModelSerializers to Alba syntax conversion" do
       include Alba::Resource
 
       attributes :birthday, :age, :gender
+
       attribute :object do
         "access_token"
       end

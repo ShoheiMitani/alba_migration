@@ -2,6 +2,10 @@
 
 module AlbaMigration
   class Snippet
+    include SuperclassRewritable
+
+    include AttributeRewritable
+
     # @rbs migrate_file_path: String
     # @rbs return: Array[Synvert::Core::Rewriter]
     def self.snippets: (migrate_file_path: String) -> Array[Synvert::Core::Rewriter]
@@ -13,11 +17,5 @@ module AlbaMigration
     # @rbs migrate_file_path: String
     # @rbs return: void
     def initialize: (migrate_file_path: String) -> void
-
-    # @rbs return: Synvert::Core::Rewriter
-    def superclass_rewriter: () -> Synvert::Core::Rewriter
-
-    # @rbs return: Synvert::Core::Rewriter
-    def attribute_method_rewriter: () -> Synvert::Core::Rewriter
   end
 end

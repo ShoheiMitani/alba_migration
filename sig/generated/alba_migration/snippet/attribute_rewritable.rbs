@@ -1,0 +1,10 @@
+# Generated from lib/alba_migration/snippet/attribute_rewritable.rb with RBS::Inline
+
+module AlbaMigration
+  class Snippet
+    module AttributeRewritable
+      # @rbs return: Synvert::Core::Rewriter
+      def attribute_method_rewriter: () -> Synvert::Core::Rewriter
+    end
+  end
+end
