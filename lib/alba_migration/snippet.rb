@@ -19,6 +19,13 @@ module AlbaMigration
 
     # @rbs migrate_file_path: String
     # @rbs return: void
+    def self.process_snippets(migrate_file_path:)
+      snippets = snippets(migrate_file_path:)
+      snippets.each(&:process)
+    end
+
+    # @rbs migrate_file_path: String
+    # @rbs return: void
     def initialize(migrate_file_path:)
       @migrate_file_path = migrate_file_path
     end

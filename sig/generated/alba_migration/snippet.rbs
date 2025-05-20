@@ -8,6 +8,10 @@ module AlbaMigration
 
     # @rbs migrate_file_path: String
     # @rbs return: void
+    def self.process_snippets: (migrate_file_path: String) -> void
+
+    # @rbs migrate_file_path: String
+    # @rbs return: void
     def initialize: (migrate_file_path: String) -> void
 
     # @rbs return: Synvert::Core::Rewriter
