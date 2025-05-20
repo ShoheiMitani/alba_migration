@@ -123,6 +123,8 @@ module AlbaMigration
           # Rewrite the entire class at once
           with_node type: "class" do
             class_name = node.children[0].loc.expression.source
+            superclass_node = node.children[1]
+            superclass_src = superclass_node ? " < #{superclass_node.loc.expression.source}" : ""
             class_body = node.children[2]
             next unless class_body
 
@@ -201,25 +203,26 @@ module AlbaMigration
             end
 
             # 2. Generate new code for the entire class
-            new_lines = ["class #{class_name}"]
+            new_lines = ["class #{class_name}#{superclass_src}"]
 
-            # Add attributes group at the top
+            # Add include Alba::Resource first if present
+            include_line = nil
+            if !other_lines.empty?
+              include_line = other_lines.find { |line| line.include?("include") }
+            end
+            new_lines << include_line if include_line
+
+            # Add a blank line if include_line was added
+            new_lines << "" if include_line
+
+            # Add attributes group after include
             unless attributes_group.empty?
               new_lines << "  attributes #{attributes_group.join(", ")}"
             end
 
-            # Add include and attributes lines
+            # Add other attribute lines (rare, for legacy code)
             if !other_lines.empty?
-              include_line = other_lines.find { |line| line.include?("include") }
               attribute_lines = other_lines.select { |line| !line.include?("include") }
-
-              # Add include first
-              new_lines << include_line if include_line
-
-              # Add a blank line
-              new_lines << ""
-
-              # Add attributes lines
               new_lines.concat(attribute_lines) unless attribute_lines.empty?
             end
 
