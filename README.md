@@ -39,6 +39,17 @@ If you are using Bundler:
 bundle exec alba_migration app/serializers/**/*.rb
 ```
 
+#### Custom Snippet Support (`--add_on` option)
+
+You can specify a custom snippet Ruby file to extend or override the default migration behavior using the `--add_on` option:
+
+```bash
+alba_migration --add_on path/to/custom_snippet.rb path/to/your/serializer.rb
+```
+
+- The custom snippet file should define a Synvert rewriter object.
+- This allows you to add your own migration logic in addition to the built-in conversion.
+
 #### Example
 
 **Before:**
