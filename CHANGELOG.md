@@ -1,5 +1,9 @@
 # GHANGELOG
 
+## 0.0.5 (2024-06-08)
+
+- --add_on option to CLI for custom snippet support
+
 ## 0.0.4 (2024-06-08)
 
 - Extend support for attribute rewriting
