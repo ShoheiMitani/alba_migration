@@ -6,8 +6,12 @@ module AlbaMigration
     # @rbs return: void
     def self.start: (untyped args) -> void
 
-    # @rbs file_patterns: Array[String]
+    # @rbs args: Array[String]
     # @rbs return: void
-    def execute: (?Array[String] file_patterns) -> void
+    def execute: (?Array[String] args) -> void
+
+    private
+
+    def options_parser: (untyped options) -> untyped
   end
 end

@@ -11,8 +11,9 @@ module AlbaMigration
     def self.snippets: (migrate_file_path: String) -> Array[Synvert::Core::Rewriter]
 
     # @rbs migrate_file_path: String
+    # @rbs custom_snippet_path: String | nil
     # @rbs return: void
-    def self.process_snippets: (migrate_file_path: String) -> void
+    def self.process_snippets: (migrate_file_path: String, ?custom_snippet_path: String | nil) -> void
 
     # @rbs migrate_file_path: String
     # @rbs return: void
