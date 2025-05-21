@@ -3,5 +3,5 @@
 # rbs_inline: enabled
 
 module AlbaMigration
-  VERSION = "0.0.3"
+  VERSION = "0.0.4"
 end

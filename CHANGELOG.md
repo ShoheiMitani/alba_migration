@@ -1,5 +1,9 @@
 # GHANGELOG
 
+## 0.0.4 (2024-06-08)
+
+- Extend support for attribute rewriting
+
 ## 0.0.3 (2024-06-07)
 
 - Add gem dependency for easier installation
