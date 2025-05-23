@@ -6,6 +6,8 @@ module AlbaMigration
 
     include AttributeRewritable
 
+    include IfRewritable
+
     # @rbs migrate_file_path: String
     # @rbs return: Array[Synvert::Core::Rewriter]
     def self.snippets: (migrate_file_path: String) -> Array[Synvert::Core::Rewriter]

@@ -48,6 +48,30 @@ module AlbaMigration
               body_src = node.body ? node.body.to_source : ""
               replace_with "proc { #{body_src} }"
             end
+
+            # Convert attribute method to attributes method only if it has an if condition
+            with_node node_type: "call_node", receiver: nil, message: "attribute" do
+              # Check if this attribute call has an 'if' argument
+              has_if_option = false
+              if node.arguments&.arguments
+                node.arguments.arguments.each do |arg|
+                  if arg.type == :keyword_hash_node && arg.elements
+                    arg.elements.each do |element|
+                      if element.type == :assoc_node && element.key.type == :symbol_node && element.key.unescaped == "if"
+                        has_if_option = true
+                        break
+                      end
+                    end
+                  end
+                end
+              end
+
+              if has_if_option
+                # Get all arguments
+                args = node.arguments ? node.arguments.arguments.map(&:to_source).join(", ") : ""
+                replace_with "attributes #{args}"
+              end
+            end
           end
 
           Standard::Cli.new(["--fix", Array(migrate_file_path).join(" ")]).run

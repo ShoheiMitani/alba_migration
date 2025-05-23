@@ -12,6 +12,7 @@ RSpec.describe "ActiveModelSerializers to Alba syntax conversion" do
       attribute :birthday
       attribute :age
       attribute(:gender)
+      attribute :name, if: -> { true }
       attribute :user_first_name
       attribute(:object) { 'access_token' }
       attribute(:user_id) { object.user_id }
@@ -29,6 +30,7 @@ RSpec.describe "ActiveModelSerializers to Alba syntax conversion" do
 
       attributes :birthday, :age, :gender
 
+      attributes :name, if: proc { true }
       attribute :object do
         "access_token"
       end

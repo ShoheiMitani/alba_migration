@@ -1,0 +1,10 @@
+# Generated from lib/alba_migration/snippet/superclass_rewriter.rb with RBS::Inline
+
+module AlbaMigration
+  class Snippet
+    module SuperclassRewritable
+      # @rbs return: Synvert::Core::Rewriter
+      def superclass_rewriter: () -> Synvert::Core::Rewriter
+    end
+  end
+end

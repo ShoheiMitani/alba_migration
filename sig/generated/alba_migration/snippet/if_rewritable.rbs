@@ -1,0 +1,10 @@
+# Generated from lib/alba_migration/snippet/if_rewritable.rb with RBS::Inline
+
+module AlbaMigration
+  class Snippet
+    module IfRewritable
+      # @rbs return: Synvert::Core::Rewriter
+      def if_rewriter: () -> Synvert::Core::Rewriter
+    end
+  end
+end

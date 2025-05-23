@@ -2,13 +2,15 @@
 
 # rbs_inline: enabled
 
-require_relative "snippet/superclass_rewritable"
 require_relative "snippet/attribute_rewritable"
+require_relative "snippet/if_rewritable"
+require_relative "snippet/superclass_rewritable"
 
 module AlbaMigration
   class Snippet
     include SuperclassRewritable
     include AttributeRewritable
+    include IfRewritable
 
     # @rbs migrate_file_path: String
     # @rbs return: Array[Synvert::Core::Rewriter]
@@ -16,7 +18,8 @@ module AlbaMigration
       snippet_creator = new(migrate_file_path:)
       [
         snippet_creator.superclass_rewriter,
-        snippet_creator.attribute_method_rewriter
+        snippet_creator.attribute_method_rewriter,
+        snippet_creator.if_rewriter
       ]
     end
 
