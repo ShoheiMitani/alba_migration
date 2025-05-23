@@ -209,10 +209,28 @@ RSpec.describe AlbaMigration::Snippet do
       end
     end
 
+    context "unsupported method" do
+      it_behaves_like "converts" do
+        let(:test_content) { <<~EOS }
+          class AttributeResource
+            attribute :birthday, if: -> { true }
+            has_one :profile, serializer: ProfileSerializer
+          end
+        EOS
+        let(:test_rewritten_content) { <<~EOS }
+          class AttributeResource
+            attribute :birthday, if: -> { true }
+            has_one :profile, serializer: ProfileSerializer
+          end
+        EOS
+      end
+    end
+
     context "combined attribute and independent method" do
       it_behaves_like "converts" do
         let(:test_content) { <<~EOS }
           class AttributeResource < ParentResource
+            has_one :profile, serializer: ProfileSerializer
             attribute :birthday
             attribute :age
             attribute(:gender)
@@ -229,6 +247,7 @@ RSpec.describe AlbaMigration::Snippet do
         EOS
         let(:test_rewritten_content) { <<~EOS }
           class AttributeResource < ParentResource
+            has_one :profile, serializer: ProfileSerializer
             attributes :birthday, :age, :gender
 
             attribute :object do
