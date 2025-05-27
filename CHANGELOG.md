@@ -1,5 +1,10 @@
 # GHANGELOG
 
+## 0.0.6 (2024-06-08)
+
+- Implement if condition lambda-to-proc conversion in AMS to Alba migration
+- Improve conditional attribute handling for better Alba compatibility
+
 ## 0.0.5 (2024-06-08)
 
 - --add_on option to CLI for custom snippet support

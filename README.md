@@ -76,6 +76,7 @@ Currently, AlbaMigration supports the following AMS syntax:
 - `class ... < ActiveModel::Serializer` with `attributes ...` inside the class body
 - Only the conversion of the class definition and `attributes` is supported at this time
 - Attribute methods (e.g. `attribute :foo do ... end`) are now automatically converted
+- Conditional attributes with `if` option are converted from lambda to proc syntax
 - Other AMS features (e.g., associations, custom methods) are **not** yet supported
 
 ## Contributing
